@@ -1,0 +1,51 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  font-family: fantasy;
+  font-size: 80px;
+}
+.logo-photo {
+  background-image: url(./beerflix.png);
+  background-size: 250px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.logo2 {
+  width: 500px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+header {
+  display: flex;
+  height: 30vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.beerlist {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+  padding: 15px;
+}
+.beer {
+  border-radius: 10px;
+  text-align: center;
+  background-color: rgb(230, 210, 32);
+  height: 200px;
+}
