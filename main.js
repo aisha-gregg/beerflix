@@ -1,12 +1,6 @@
-export function createBeer({ beerId, name, description }) {
-  return {
-    id: beerId,
-    name,
-    description
-  };
-}
+import { renderBeers } from "./renderer.js";
 
-function toggleBeerDetail(beerId) {
+function toggleBeerDetail() {
   const beerDetail = document.querySelector("#beer-detail");
   beerDetail.classList.toggle("beer-detail-show");
 }
@@ -15,9 +9,11 @@ function createToggleModalEvents() {
   const elements = document.querySelectorAll(
     "#beer-detail-veil, .close-icon i, .beer"
   );
-  for (let i = 0; i < elements.length; i++) {
-    elements[i].addEventListener("click", () => toggleBeerDetail());
-  }
+
+  elements.forEach(element =>
+    element.addEventListener("click", () => toggleBeerDetail())
+  );
 }
 
 createToggleModalEvents();
+renderBeers();
