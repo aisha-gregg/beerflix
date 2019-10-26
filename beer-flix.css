@@ -108,11 +108,10 @@ header {
 }
 
 .modal-container {
-  position: fixed;
-  left: 50px;
-  right: 50px;
-  top: 50px;
-  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .veil {
@@ -132,12 +131,13 @@ header {
   background-color: #fffffff6;
   border-radius: var(--border-radius);
   border-color: rgb(26, 26, 26);
-  border-style: groove;
+  border-style: solid;
+  padding: 40px;
+  max-width: var(--max-body-width);
 }
 
 .beer-detail-show {
   display: flex;
-  overflow-y: hidden;
 }
 
 .likes-logo {

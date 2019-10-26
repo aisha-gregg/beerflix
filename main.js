@@ -12,7 +12,7 @@ function toggleBeerDetail(id) {
     }
   }
   const modalResult = `
-  <div class ="lock-scroll"
+  
      <div class="modal-container">
       <div id="beer-detail-veil" class="veil"></div>
       <div class="beer-details">
@@ -20,7 +20,7 @@ function toggleBeerDetail(id) {
           <i class="fas fa-times"></i>
         </div>
         <div class="beer" data-id="${foundBeer.id}">
-          <p>${foundBeer.name}</p>
+          <h2>${foundBeer.name}</h2>
           <p>${foundBeer.description}</p>
           <img src="${foundBeer.photo}" alt="" class="beer-image"/>
           <button>Add Comment</button>
@@ -29,7 +29,7 @@ function toggleBeerDetail(id) {
         </div>
       </div>
     </div>
-  </div>
+  
   
     `;
   beerDetail.innerHTML = modalResult;
