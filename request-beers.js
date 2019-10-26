@@ -1,5 +1,5 @@
 export async function requestBeers() {
-  const response = await fetch(
+  const responseBeers = await fetch(
     "https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh/api/v1/beers",
     {
       headers: {
@@ -7,6 +7,8 @@ export async function requestBeers() {
       }
     }
   );
-  const value = await response.json();
+
+  const value = await responseBeers.json();
   return value.beers;
 }
+requestBeers();

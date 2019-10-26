@@ -1,21 +1,25 @@
 import { requestBeers } from "./request-beers.js";
 import { createBeer } from "./create-beer.js";
+import { beersRepository } from "./beers-repository.js";
 
 export async function renderBeers() {
   const responseBeers = await requestBeers();
-  const beers = responseBeers.map(responseBeer => createBeer(responseBeer));
+  beersRepository.beers = responseBeers.map(responseBeer =>
+    createBeer(responseBeer)
+  );
   const beerList = document.querySelector("#beer-list");
-  beerList.innerHTML = `
-    <article class<%="beer"%>>
-        <img src="" alt="" />
-        <p>Berr</p>
-        <p>Price:20</p>
-    </article>
 
-    <article class="beer">
-        <img src="" alt="" />
-        <p>Berr lala,</p>
-        <p>Price:100</p>
-    </article>`;
+  let result = "";
+
+  for (let i = 0; i < beersRepository.beers.length; i++) {
+    const beer = beersRepository.beers[i];
+    result += `
+    <div class="beer" data-id="${beer.id}">
+    <p>${beer.name}</p>
+    <p>${beer.description}</p>
+    <img src="${beer.photo}" alt="" />
+    </div>
+    `;
+  }
+  beerList.innerHTML = result;
 }
-<h1><%= message %></h1>
