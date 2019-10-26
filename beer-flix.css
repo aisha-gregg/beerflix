@@ -3,7 +3,9 @@
   --title-font: fantasy;
   --border-radius: 5px;
   --max-body-width: 800px;
-  --modal-padding-size: 60px;
+  --large: 48px;
+  --normal: 24px;
+  --small: 12px;
 }
 
 *,
@@ -151,4 +153,38 @@ header {
 
 .lock-scroll {
   overflow-y: hidden;
+}
+
+.beer-description {
+  display: flex;
+  text-align: left;
+}
+
+.beer-likes {
+  display: flex;
+}
+
+.beer-content {
+  flex: 2;
+}
+
+.comments {
+  display: flex;
+}
+
+.comments-input {
+  flex: 1;
+}
+
+.beer-wrapper {
+  display: flex;
+}
+
+.beer-image-container {
+  padding: var(--small);
+  flex: 1;
+}
+
+.beer-header {
+  display: flex;
 }

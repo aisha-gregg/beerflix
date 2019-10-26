@@ -19,13 +19,26 @@ function toggleBeerDetail(id) {
         <div class="close-icon">
           <i class="fas fa-times"></i>
         </div>
-        <div class="beer" data-id="${foundBeer.id}">
-          <h2>${foundBeer.name}</h2>
-          <p>${foundBeer.description}</p>
-          <img src="${foundBeer.photo}" alt="" class="beer-image"/>
-          <button>Add Comment</button>
-          <label>Like</label>
-          <img src="./images/beer-like.png" alt="" class="likes-logo" />
+        <div class="beer-wrapper" data-id="${foundBeer.id}">
+          <div class="beer-content"> 
+            <div class="beer-header">
+              <h2>${foundBeer.name}</h2>
+              <div class="beer-likes">
+                <span>Like</span>
+                <img src="./images/beer-like.png" alt="" class="likes-logo" />
+              </div>
+            </div>
+            <p class="beer-description">${foundBeer.description}</p>
+              
+            <div class="comments">
+              <textarea class="comments-input"> 
+              </textarea>
+              <button>Add Comment</button>
+            </div>
+          </div>
+          <div class="beer-image-container">
+            <img src="${foundBeer.photo}" alt="" class="beer-image"/>
+          </div>
         </div>
       </div>
     </div>
