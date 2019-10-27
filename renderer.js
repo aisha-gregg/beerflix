@@ -1,3 +1,5 @@
+import { createToggleModalEvents } from "./main.js";
+
 export function renderBeers(beers) {
   const beerList = document.querySelector("#beer-list");
 
@@ -7,11 +9,13 @@ export function renderBeers(beers) {
     const beer = beers[i];
     result += `
     <div class="beer" data-id="${beer.id}">
-    <p>${beer.name}</p>
-    <p>${beer.description}</p>
-    <img src="${beer.photo}" alt="" />
+      <p>${beer.name}</p>
+      <p>${beer.description}</p>
+      <img src="${beer.photo}" alt="" />
     </div>
     `;
   }
+
   beerList.innerHTML = result;
+  createToggleModalEvents();
 }

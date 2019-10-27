@@ -3,6 +3,8 @@ import { beersRepository } from "./beers-repository.js";
 import { createFilterEvents } from "./filter-beer.js";
 import { createBeer } from "./create-beer.js";
 import { requestBeers } from "./request-beers.js";
+import { postComment } from "./post-comment.js";
+import { modalRender } from "./modalRender.js";
 
 function toggleBeerDetail(id) {
   const beerDetail = document.querySelector("#beer-detail");
@@ -13,52 +15,23 @@ function toggleBeerDetail(id) {
       foundBeer = beersRepository.beers[i];
     }
   }
-  let comments = "";
-  for (let i = 0; i < foundBeer.comments.length; i++) {
-    comments += `
-    <div>
-      <p>${foundBeer.comments[i].comment}</p>
-    </div>
-    `;
-  }
-  const modalResult = `
-     <div class="modal-container">
-      <div id="beer-detail-veil" class="veil"></div>
-      <div class="beer-details">
-        <div class="close-icon">
-          <i class="fas fa-times"></i>
-        </div>
-        <div class="beer-wrapper" data-id="${foundBeer.id}">
-          <div class="beer-content"> 
-            <div class="beer-header">
-              <h2>${foundBeer.name}</h2>
-              <div class="beer-likes">
-                <span>Like ${foundBeer.likes}</span>
-                <img src="./images/beer-like.png" alt="" class="likes-logo" />
-              </div>
-            </div>
-            <p class="beer-description">${foundBeer.description}</p>
-              
-            <div class="comments">
-              <div class="comments-controls">
-                <textarea class="comments-input"></textarea>
-                <button>Add Comment</button>
-              </div>
-              <div class="comments-section">
-                ${comments}
-              </div>
-            </div>
-          </div>
-          <div class="beer-image-container">
-            <img src="${foundBeer.photo}" alt="" class="beer-image"/>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-  
-    `;
-  beerDetail.innerHTML = modalResult;
+  modalRender(foundBeer);
+  const modalBody = document.querySelector("#add-comment");
+  modalBody.addEventListener("click", async () => {
+    const commentValue = document.querySelector(".comments-input").value;
+    await postComment(id, commentValue);
+    const beersResponse = await requestBeers();
+    beersRepository.beers = beersResponse.map(responseBeer =>
+      createBeer(responseBeer)
+    );
+    let foundBeer;
+    for (let i = 0; i < beersRepository.beers.length; i++) {
+      if (beersRepository.beers[i].id === id) {
+        foundBeer = beersRepository.beers[i];
+      }
+    }
+    modalRender(foundBeer);
+  });
 
   const body = document.querySelector("body");
   body.classList.add("lock-scroll");
@@ -74,7 +47,7 @@ function toggleBeerDetail(id) {
   });
 }
 
-function createToggleModalEvents() {
+export function createToggleModalEvents() {
   const elements = document.querySelectorAll(".beer");
 
   elements.forEach(element =>
@@ -90,6 +63,5 @@ requestBeers().then(beersResponse => {
     createBeer(responseBeer)
   );
   renderBeers(beersRepository.beers);
-  createToggleModalEvents();
   createFilterEvents();
 });
