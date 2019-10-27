@@ -1,8 +1,17 @@
-export function createBeer({ beerId, name, description, image }) {
+export function createBeer({
+  beerId,
+  name,
+  description,
+  image,
+  comment,
+  likes
+}) {
   return {
     id: beerId,
     name,
     description,
-    photo: image
+    photo: image,
+    comments: comment || [],
+    likes
   };
 }

@@ -11,4 +11,3 @@ export async function requestBeers() {
   const value = await responseBeers.json();
   return value.beers;
 }
-requestBeers();

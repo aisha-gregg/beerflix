@@ -1,18 +1,10 @@
-import { requestBeers } from "./request-beers.js";
-import { createBeer } from "./create-beer.js";
-import { beersRepository } from "./beers-repository.js";
-
-export async function renderBeers() {
-  const responseBeers = await requestBeers();
-  beersRepository.beers = responseBeers.map(responseBeer =>
-    createBeer(responseBeer)
-  );
+export function renderBeers(beers) {
   const beerList = document.querySelector("#beer-list");
 
   let result = "";
 
-  for (let i = 0; i < beersRepository.beers.length; i++) {
-    const beer = beersRepository.beers[i];
+  for (let i = 0; i < beers.length; i++) {
+    const beer = beers[i];
     result += `
     <div class="beer" data-id="${beer.id}">
     <p>${beer.name}</p>

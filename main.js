@@ -1,6 +1,8 @@
 import { renderBeers } from "./renderer.js";
 import { beersRepository } from "./beers-repository.js";
-import { filterbeers, createFilterEvents } from "./filter-beer.js";
+import { createFilterEvents } from "./filter-beer.js";
+import { createBeer } from "./create-beer.js";
+import { requestBeers } from "./request-beers.js";
 
 function toggleBeerDetail(id) {
   const beerDetail = document.querySelector("#beer-detail");
@@ -11,8 +13,15 @@ function toggleBeerDetail(id) {
       foundBeer = beersRepository.beers[i];
     }
   }
+  let comments = "";
+  for (let i = 0; i < foundBeer.comments.length; i++) {
+    comments += `
+    <div>
+      <p>${foundBeer.comments[i].comment}</p>
+    </div>
+    `;
+  }
   const modalResult = `
-  
      <div class="modal-container">
       <div id="beer-detail-veil" class="veil"></div>
       <div class="beer-details">
@@ -24,16 +33,20 @@ function toggleBeerDetail(id) {
             <div class="beer-header">
               <h2>${foundBeer.name}</h2>
               <div class="beer-likes">
-                <span>Like</span>
+                <span>Like ${foundBeer.likes}</span>
                 <img src="./images/beer-like.png" alt="" class="likes-logo" />
               </div>
             </div>
             <p class="beer-description">${foundBeer.description}</p>
               
             <div class="comments">
-              <textarea class="comments-input"> 
-              </textarea>
-              <button>Add Comment</button>
+              <div class="comments-controls">
+                <textarea class="comments-input"></textarea>
+                <button>Add Comment</button>
+              </div>
+              <div class="comments-section">
+                ${comments}
+              </div>
             </div>
           </div>
           <div class="beer-image-container">
@@ -72,7 +85,11 @@ function createToggleModalEvents() {
   );
 }
 
-renderBeers().then(() => {
+requestBeers().then(beersResponse => {
+  beersRepository.beers = beersResponse.map(responseBeer =>
+    createBeer(responseBeer)
+  );
+  renderBeers(beersRepository.beers);
   createToggleModalEvents();
   createFilterEvents();
 });
