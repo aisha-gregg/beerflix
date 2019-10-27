@@ -4,7 +4,8 @@ export function createBeer({
   description,
   image,
   comment,
-  likes
+  likes,
+  firstBrewed
 }) {
   return {
     id: beerId,
@@ -12,6 +13,13 @@ export function createBeer({
     description,
     photo: image,
     comments: comment || [],
-    likes
+    likes,
+    date: formatToDate(firstBrewed)
   };
+}
+
+function formatToDate(outdatedFormat) {
+  const [month, year] = outdatedFormat.split("/");
+  const date = new Date(Date.UTC(year, month, 1));
+  return date;
 }
