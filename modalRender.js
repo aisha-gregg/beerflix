@@ -1,3 +1,8 @@
+import { postComment } from "./post-comment.js";
+import { requestBeers } from "./request-beers.js";
+import { beersRepository } from "./beers-repository.js";
+import { createBeer } from "./create-beer.js";
+
 export function modalRender(beer) {
   const beerDetail = document.querySelector("#beer-detail");
   let comments = "";
@@ -44,4 +49,44 @@ export function modalRender(beer) {
     </div>
     `;
   beerDetail.innerHTML = modalResult;
+  addCommentEvents(beer.id);
+  addCloseEvents();
+}
+
+function addCommentEvents(id) {
+  const modalBody = document.querySelector("#add-comment");
+  modalBody.removeEventListener("click", () => clickHandler(id));
+  modalBody.addEventListener("click", () => clickHandler(id));
+}
+
+async function clickHandler(id) {
+  const commentValue = document.querySelector(".comments-input").value;
+  await postComment(id, commentValue);
+  const beersResponse = await requestBeers();
+  beersRepository.beers = beersResponse.map(responseBeer =>
+    createBeer(responseBeer)
+  );
+  let foundBeer;
+  for (let i = 0; i < beersRepository.beers.length; i++) {
+    if (beersRepository.beers[i].id === id) {
+      foundBeer = beersRepository.beers[i];
+    }
+  }
+  modalRender(foundBeer);
+}
+
+function addCloseEvents() {
+  const beerDetail = document.querySelector("#beer-detail");
+  const body = document.querySelector("body");
+  body.classList.add("lock-scroll");
+  const closeModalElements = document.querySelectorAll(
+    ".close-icon i, #beer-detail-veil"
+  );
+
+  closeModalElements.forEach(closeModalElement => {
+    closeModalElement.addEventListener("click", () => {
+      beerDetail.classList.toggle("beer-detail-show");
+      body.classList.remove("lock-scroll");
+    });
+  });
 }
