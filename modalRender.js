@@ -25,7 +25,7 @@ export function modalRender(beer) {
             <div class="beer-header">
               <h2>${beer.name}</h2>
               <div class="beer-likes">
-                <span>Like ${beer.likes}</span>
+                <span>Likes ${beer.likes}</span>
                 <img src="./images/beer-like.png" alt="" class="likes-logo" />
               </div>
             </div>

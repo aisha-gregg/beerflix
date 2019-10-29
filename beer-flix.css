@@ -23,7 +23,7 @@ body {
   font-family: var(--body-font);
 }
 img {
-  width: 100%;
+  width: auto;
 }
 h1 {
   font-family: var(--title-font);
@@ -103,10 +103,9 @@ header {
 }
 
 .beer-detail {
-  overflow-y: scroll;
   position: fixed;
   width: 100%;
-  max-height: 100vh;
+  height: 100%;
   top: 0;
   display: none;
 }
@@ -116,7 +115,6 @@ header {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
 }
 
 .veil {
@@ -140,6 +138,7 @@ header {
   padding: 40px;
   max-width: var(--max-body-width);
   height: 100%;
+  overflow-y: scroll;
 }
 
 .beer-detail-show {
@@ -147,7 +146,7 @@ header {
 }
 
 .likes-logo {
-  width: 30px;
+  height: 30px;
 }
 
 .close-icon {
@@ -166,6 +165,8 @@ header {
 
 .beer-likes {
   display: flex;
+  margin-left: var(--small);
+  align-items: center;
 }
 
 .beer-content {
@@ -192,4 +193,5 @@ header {
 
 .beer-header {
   display: flex;
+  align-items: center;
 }
