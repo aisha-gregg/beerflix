@@ -1,11 +1,12 @@
 import { renderBeers } from "./renderer.js";
 import { beersRepository } from "./beers-repository.js";
 import { sortBeers } from "./sort-beers.js";
+import { requestBeers } from "./request-beers.js";
 
 export function createFilterEvents() {
   const input = document.querySelector("#search-beer");
-  input.addEventListener("input", event => {
-    const filteredBeersByName = filterBeersByName(event.target.value);
+  input.addEventListener("input", async event => {
+    const filteredBeersByName = await filterBeersByName(event.target.value);
     const sortedFilteredBeers = sortBeers(filteredBeersByName);
     renderBeers(sortedFilteredBeers);
   });
@@ -20,14 +21,7 @@ export function createFilterEvents() {
 }
 
 function filterBeersByName(name) {
-  let foundBeers = [];
-  for (let i = 0; i < beersRepository.beers.length; i++) {
-    const beer = beersRepository.beers[i];
-    if (beer.name.toLowerCase().includes(name.toLowerCase())) {
-      foundBeers.push(beer);
-    }
-  }
-  return foundBeers;
+  return requestBeers({ name });
 }
 
 function filterBeersByDate(date) {
