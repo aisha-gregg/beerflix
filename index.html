@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Beerflix</title>
-    <link rel="stylesheet" href="beer-flix.css" />
+    <link rel="stylesheet" href="/beer-flix.css" />
     <script
       src="https://kit.fontawesome.com/dca9dc94f1.js"
       crossorigin="anonymous"
@@ -12,7 +12,20 @@
   </head>
 
   <body>
-    <header class="logo-photo"><h1>BeerFlix</h1></header>
+    <header class="logo-header">
+      <h1>BeerFlix</h1>
+
+      <picture class="image-logo">
+        <source
+          srcset="
+            images/beerflix-mobile.png 4000w,
+            images/beerflix-tablet.png 3000w
+          "
+          media="(min-width:100px)"
+        />
+        <img src="images/beerflix.png" alt="image-logo" />
+      </picture>
+    </header>
     <div class="container">
       <div class="search">
         <h2 class="search-text">Search our beer stock</h2>
@@ -34,6 +47,6 @@
     </div>
 
     <article id="beer-detail" class="beer-detail"></article>
-    <script type="module" src="main.js"></script>
+    <script type="module" src="/main.js"></script>
   </body>
 </html>

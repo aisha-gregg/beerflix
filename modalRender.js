@@ -26,7 +26,7 @@ export function modalRender(beer) {
               <h2>${beer.name}</h2>
               <div class="beer-likes">
                 <span>Likes ${beer.likes}</span>
-                <img src="./images/beer-like.png" alt="" class="likes-logo" />
+                <img src="/images/beer-like.png" alt="" class="likes-logo" />
               </div>
             </div>
             <p class="beer-description">${beer.description}</p>
@@ -85,6 +85,7 @@ function addCloseEvents() {
 
   closeModalElements.forEach(closeModalElement => {
     closeModalElement.addEventListener("click", () => {
+      history.pushState({}, "home", "/");
       beerDetail.classList.toggle("beer-detail-show");
       body.classList.remove("lock-scroll");
     });

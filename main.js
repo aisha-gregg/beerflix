@@ -19,13 +19,30 @@ function toggleBeerDetail(id) {
 
 export function createToggleModalEvents() {
   const elements = document.querySelectorAll(".beer");
-
   elements.forEach(element =>
     element.addEventListener("click", () => {
       const id = Number(element.dataset.id);
-      toggleBeerDetail(id);
+      history.pushState({ id }, "beer", `/beers/${id}`);
     })
   );
+}
+function createModalEvents() {
+  const pushState = history.pushState;
+  history.pushState = function() {
+    pushState.apply(history, arguments);
+    dispatchEvent(new Event("popstate"));
+  };
+
+  window.addEventListener("popstate", () => {
+    if (history.state.id !== undefined) {
+      toggleBeerDetail(history.state.id);
+    }
+  });
+
+  const id = location.pathname.split("/")[2];
+  if (id !== undefined) {
+    toggleBeerDetail(Number(id));
+  }
 }
 
 requestBeers().then(beersResponse => {
@@ -34,4 +51,5 @@ requestBeers().then(beersResponse => {
   );
   renderBeers(beersRepository.beers);
   createFilterEvents();
+  createModalEvents();
 });

@@ -58,12 +58,16 @@ h1 {
   border-style: inset;
 }
 
-.logo-photo {
-  background-image: url(./images/beerflix.png);
+.logo-header {
   background-size: 280px;
   background-repeat: no-repeat;
   background-position: center;
   background-color: #963dda;
+}
+.image-logo {
+  min-width: 50px;
+  display: flex;
+  flex-direction: center;
 }
 
 .logo2 {
