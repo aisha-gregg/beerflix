@@ -1,11 +1,13 @@
 :root {
   --body-font: sans-serif;
   --title-font: fantasy;
-  --border-radius: 5px;
   --max-body-width: 800px;
-  --large: 48px;
+  --large: 40px;
+  --x-large: 48px;
   --normal: 24px;
+  --x-small: 5px;
   --small: 12px;
+  --medium: 15px;
 }
 
 *,
@@ -38,10 +40,11 @@ h1 {
 .filter {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .filter label {
-  padding: 10px;
+  padding: var(--small);
 }
 
 .search-text {
@@ -50,30 +53,37 @@ h1 {
 }
 
 .search {
-  padding: 15px;
+  padding: var(--medium);
 }
 
 .search-bar {
-  border-radius: var(--border-radius);
+  border-radius: var(--x-small);
   border-style: inset;
 }
 
 .logo-header {
-  background-size: 280px;
-  background-repeat: no-repeat;
-  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #963dda;
 }
-.image-logo {
-  min-width: 50px;
-  display: flex;
-  flex-direction: center;
+
+.logo-header h1 {
+  position: relative;
+  z-index: 1;
 }
 
-.logo2 {
-  width: 500px;
-  display: flex;
-  justify-content: flex-start;
+.image-logo {
+  position: absolute;
+}
+
+.image-logo img {
+  width: 112px;
+}
+@media (min-width: 768px) {
+  .image-logo img {
+    width: 200px;
+  }
 }
 
 header {
@@ -87,12 +97,13 @@ header {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 5fr));
   grid-gap: 30px;
-  padding: 15px;
+  padding: var(--medium);
 }
+
 .beerlist .beer {
   box-shadow: 5px 12px 1px #8210da61;
-  padding: 20px;
-  border-radius: 10px;
+  padding: var(--medium);
+  border-radius: var(--medium);
 
   text-align: center;
 }
@@ -101,9 +112,11 @@ header {
   height: 150px;
   object-fit: contain;
 }
+
 .beer-image {
-  height: 250px;
+  height: 175px;
   object-fit: contain;
+  flex-wrap: wrap;
 }
 
 .beer-detail {
@@ -112,6 +125,7 @@ header {
   height: 100%;
   top: 0;
   display: none;
+  z-index: 2;
 }
 
 .modal-container {
@@ -136,10 +150,10 @@ header {
   position: relative;
   z-index: 1;
   background-color: #fffffff6;
-  border-radius: var(--border-radius);
+  border-radius: var(--x-small);
   border-color: rgb(26, 26, 26);
   border-style: solid;
-  padding: 40px;
+  padding: var(--large);
   max-width: var(--max-body-width);
   height: 100%;
   overflow-y: scroll;
@@ -156,6 +170,7 @@ header {
 .close-icon {
   display: flex;
   justify-content: flex-end;
+  height: var(--large);
 }
 
 .lock-scroll {
