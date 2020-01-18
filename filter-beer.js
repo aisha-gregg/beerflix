@@ -23,7 +23,10 @@ export function createFilterEvents() {
 
 async function filterBeersByName(name) {
   const beersReponse = await requestBeers({ name });
-  return beersReponse.map(responseBeer => createBeer(responseBeer));
+  beersRepository.beers = beersReponse.map(responseBeer =>
+    createBeer(responseBeer)
+  );
+  return beersRepository.beers;
 }
 
 function filterBeersByDate(date) {
