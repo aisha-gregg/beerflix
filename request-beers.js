@@ -1,3 +1,5 @@
+import { createBeer } from "./create-beer.js";
+
 export async function requestBeers({ name } = {}) {
   const url = new URL(
     `https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh/api/v1/beers`
@@ -17,5 +19,5 @@ export async function requestBeers({ name } = {}) {
   });
 
   const value = await responseBeers.json();
-  return value.beers;
+  return value.beers.map(beer => createBeer(beer));
 }

@@ -1,19 +1,13 @@
 import { renderBeers } from "./renderer.js";
 import { beersRepository } from "./beers-repository.js";
 import { createFilterEvents } from "./filter-beer.js";
-import { createBeer } from "./create-beer.js";
 import { requestBeers } from "./request-beers.js";
-import { modalRender } from "./modalRender.js";
+import { modalRender } from "./modal-render.js";
 
 function toggleBeerDetail(id) {
   const beerDetail = document.querySelector("#beer-detail");
   beerDetail.classList.toggle("beer-detail-show");
-  let foundBeer;
-  for (let i = 0; i < beersRepository.beers.length; i++) {
-    if (beersRepository.beers[i].id === id) {
-      foundBeer = beersRepository.beers[i];
-    }
-  }
+  const foundBeer = beersRepository.beers.find(beer => beer.id === id);
   modalRender(foundBeer);
 }
 
@@ -46,9 +40,7 @@ function createModalEvents() {
 }
 
 requestBeers().then(beersResponse => {
-  beersRepository.beers = beersResponse.map(responseBeer =>
-    createBeer(responseBeer)
-  );
+  beersRepository.beers = beersResponse;
   renderBeers(beersRepository.beers);
   createFilterEvents();
   createModalEvents();
